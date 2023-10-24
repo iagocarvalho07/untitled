@@ -15,7 +15,7 @@ class AuthForm extends StatefulWidget {
 }
 
 class _AuthFormState extends State<AuthForm> {
-  final formeKey = GlobalKey<FormState>();
+  final _formeKey = GlobalKey<FormState>();
   final _AuthFormData = AuthFormData();
 
   void _handleImagePick(File imagePick) {
@@ -32,7 +32,7 @@ class _AuthFormState extends State<AuthForm> {
   }
 
   void _submit() {
-    final isvalid = formeKey.currentState?.validate() ?? false;
+    final isvalid = _formeKey.currentState?.validate() ?? false;
     if (!isvalid) return;
 
     if (_AuthFormData.Image == null && _AuthFormData.isSingUp) {
@@ -49,7 +49,7 @@ class _AuthFormState extends State<AuthForm> {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Form(
-          key: formeKey,
+          key: _formeKey,
           child: Column(
             children: [
               if (_AuthFormData.isSingUp)
@@ -58,7 +58,7 @@ class _AuthFormState extends State<AuthForm> {
                 ),
               if (_AuthFormData.isSingUp)
                 TextFormField(
-                  key: ValueKey("Name"),
+                  key: const ValueKey("Name"),
                   initialValue: _AuthFormData.name,
                   onChanged: (name) => _AuthFormData.name = name,
                   decoration: InputDecoration(labelText: 'Nome'),
@@ -71,7 +71,7 @@ class _AuthFormState extends State<AuthForm> {
                   },
                 ),
               TextFormField(
-                key: ValueKey("Email"),
+                key: const ValueKey("Email"),
                 initialValue: _AuthFormData.email,
                 onChanged: (email) => _AuthFormData.email = email,
                 decoration: InputDecoration(labelText: 'Email'),
@@ -85,7 +85,7 @@ class _AuthFormState extends State<AuthForm> {
               ),
               TextFormField(
                 obscureText: true,
-                key: ValueKey("Senha"),
+                key: const ValueKey("Senha"),
                 initialValue: _AuthFormData.password,
                 onChanged: (password) => _AuthFormData.password = password,
                 decoration: InputDecoration(labelText: 'Senha'),

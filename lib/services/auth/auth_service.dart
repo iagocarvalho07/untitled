@@ -1,6 +1,8 @@
 import 'dart:io';
 
 
+import 'package:untitled/services/auth/auth_service_firebase.dart';
+
 import '../../models/chat_user.dart';
 import 'auth_service_mock.dart';
 
@@ -24,6 +26,7 @@ abstract class AuthService {
   Future<void> logout();
 
   factory AuthService(){
-    return AuthServiceMock();
+    // return AuthServiceMock();
+    return AuthServiceFirebase();
   }
 }

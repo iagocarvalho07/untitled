@@ -17,16 +17,18 @@ class _AuthScreenState extends State<AuthScreen> {
 
   Future<void> _handleSubmit(AuthFormData formData) async {
     try {
+      if (!mounted) return;
       setState(() => _isloading = true);
       if (formData.islogin) {
         await AuthService().login(formData.email, formData.password);
       } else {
-        await AuthService().signup(formData.email, formData.password,
+        await AuthService().signup(formData.name, formData.email,
             formData.password, formData.Image);
       }
     } catch (error) {
       // tratar o error
     } finally {
+      if (!mounted) return;
       setState(() => _isloading = false);
     }
     print("AuthPAge");
