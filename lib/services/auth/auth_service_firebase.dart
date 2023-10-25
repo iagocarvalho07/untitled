@@ -50,7 +50,8 @@ class AuthServiceFirebase implements AuthService {
       await credecnial.user?.updatePhotoURL(imageUrl);
 
       // 3 savar o usuario no banco de dados
-      await _saveChatUser(_toChatUser(credecnial.user!, imageUrl));
+      _currentUser = _toChatUser(credecnial.user!, name, imageUrl);
+      await _saveChatUser(_currentUser!);
 
     } on FirebaseAuthException catch (e) {
       print(" oque ta acontecendo nessa porra ${e}");
@@ -87,10 +88,10 @@ class AuthServiceFirebase implements AuthService {
         {'name': user.name, 'email': user.email, 'imageUrl': user.imageUrl});
   }
 
-  static ChatUser _toChatUser(User user, [String? imageUrl]) {
+  static ChatUser _toChatUser(User user, [String? name, String? imageUrl]) {
     return ChatUser(
       id: user.uid,
-      name: user.displayName ?? user.email!.split("@")[0],
+      name:name ??  user.displayName ?? user.email!.split("@")[0],
       email: user.email!,
       imageUrl: imageUrl ?? user.photoURL ?? 'assets/imagens/avatar.png',
     );
