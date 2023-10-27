@@ -23,8 +23,7 @@ class NotificationScreen extends StatelessWidget {
             subtitle: Text(items[index].body),
             onTap: () => service.remove(index),
           ),
-      )
-      ,
+      ),
     );
   }
 }
